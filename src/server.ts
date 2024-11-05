@@ -1,4 +1,5 @@
 import express from 'express'
+import { categoriesRoutes } from './routes/categories.routes';
 
 const app = express();
 app.use(express.json());
@@ -7,10 +8,6 @@ app.get("/hello",(req,res)=>{
     res.send();
 });
 
-app.post("/courses",(req,res)=>{
-    const {name} = req.body;
-
-    res.send(name);
-})
+app.use(categoriesRoutes);
 
 app.listen(3000,()=>console.log("Server Running!"));
