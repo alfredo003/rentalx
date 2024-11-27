@@ -9,17 +9,10 @@ import { AppDataSource } from '../../../../database/data-source';
 class CategoryRepository implements ICategoriesRepository {
   private repository:Repository<Category>;
 
-  private static INSTANCE: CategoryRepository;
-  private constructor() {
+  constructor() {
     this.repository =  AppDataSource.getRepository(Category);
   }
-
-  public static getInstance(): CategoryRepository {
-    if (!CategoryRepository.INSTANCE) {
-      CategoryRepository.INSTANCE = new CategoryRepository();
-    }
-    return CategoryRepository.INSTANCE;
-  }
+  
   async create({ name, description }: ICreateCategoryDTO): Promise<void> {
     const category = this.repository.create({
         description,
